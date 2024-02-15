@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "homes#top"
   devise_for :users
 
-  resources :post_images, only: [:new, :create, :index, :show]
+  resources :post_images, only: [:new, :create, :index, :show, :destroy]
 
   get 'homes/about', to: 'homes#about', as: 'about'
   # onlyオプションを使用することで、生成するルーティングを限定することができます。
@@ -11,7 +11,7 @@ end
 
 # new(投稿を作成する画面)
 # show(投稿の詳細画面)
-# ndex(投稿の一覧画面)
+# index(投稿の一覧画面)
 # edit(投稿の編集画面)
 # create(投稿作成)
 # destroy(投稿削除)
