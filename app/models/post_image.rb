@@ -1,7 +1,7 @@
 class PostImage < ApplicationRecord
   has_one_attached :image #PostImage モデルには、ActiveStorage を使って画像を持たせる
   belongs_to :user #ユーザーに属する
-  
+  has_many :post_comments, dependent: :destroy
   
  def get_image #特定の処理で名前を呼び出せるメソッド 
    unless image.attached?

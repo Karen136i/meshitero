@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
-  root to: "homes#top"
+  get 'users/show'
+  get 'users/edit'  
   devise_for :users
+  root to: 'homes#top'
+  get "homes/about" => "homes#about", as: "about"
+  resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+    resources :post_comments, only: [:create]
+  end
+  resources :users, only: [:show, :edit, :update]
+end
 
-  resources :post_images, only: [:new, :create, :index, :show, :destroy]
-
-  get 'homes/about', to: 'homes#about', as: 'about'
+  
   # onlyオプションを使用することで、生成するルーティングを限定することができます。
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
+
 
 # new(投稿を作成する画面)
 # show(投稿の詳細画面)

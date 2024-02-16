@@ -23,6 +23,7 @@ class PostImagesController < ApplicationController
 
   def show #(投稿詳細画面)
     @post_image = PostImage.find(params[:id])
+    @post_comment = PostComment.new #コメントを投稿するためのインスタンス変数
   end
 
   def destroy #(削除機能)
