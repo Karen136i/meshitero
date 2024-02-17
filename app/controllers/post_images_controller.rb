@@ -11,13 +11,15 @@ class PostImagesController < ApplicationController
     @post_image.user_id = current_user.id
     # ser_idは画像投稿を行う際に、「どのユーザーが投稿したのか」を「ユーザーの ID で判断する」カラム
     # current_user は、コードに記述するだけで、ログイン中のユーザーの情報を取得できる便利な記述
-    @post_image.save
-
-    redirect_to post_images_path
+    if @post_image.save
+      redirect_to post_images_path
+    else
+      render :new
+    end
   end
 
   def index #(投稿一覧画面)
-    @post_images = PostImage.all
+    @post_images = PostImage.page(params[:page])
 
   end
 

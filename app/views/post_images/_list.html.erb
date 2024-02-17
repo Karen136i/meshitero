@@ -1,0 +1,23 @@
+<!--投稿一覧画面-->
+<% @post_images.each do |post_image| %>
+<!--  @post_images → post_images  -->
+  <div>
+    <%= link_to post_image_path(post_image.id) do %>
+    <%= image_tag post_image.get_image %>
+  <% end %>
+
+    <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
+    
+    <p>ショップ名：<%= post_image.shop_name %></p>
+    <!--post_image変数のshop_nameカラムを表示します。 このカラムは、post_imageモデルに定義されている-->
+    
+    <p>説明：<%= post_image.caption %></p>
+    <!--post_image変数のcaptionカラムを表示します。 このカラムも、post_imageモデルに定義されている-->
+    
+    <p>ユーザーネーム：<%= post_image.user.name %></p>
+    <!--post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示します。 同様にこのカラムも、post_imageモデルに定義されている-->
+    <p><%= link_to "#{post_image.post_comments.count} コメント", post_image_path(post_image.id) %></p>
+    <!--app/views/post_images/index.html.erbと同じにする-->
+  </div>
+<% end %>
+<%= paginate post_images %>
